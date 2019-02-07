@@ -12,13 +12,42 @@ public class QueenBoard{
   }
   private void addQueen(int r, int c){
     board[r][c] = -1;
+    placeQueen(r, c);
   }
   private void removeQueen(int r, int c){
-    if (board[r][c] == -1)
-      board[r][c] = 0;
+    if (board[r][c] == -1) board[r][c] = 0;
+    clearQueen(r, c);
+  }
+  //After deleting queen, this method opens the correct tiles.
+  private void clearQueen(int r, int c){
+    //closes vertical tiles.
+    for (int x = 0; x < length; x++){
+      if (board[x][c] != -1){
+        board[x][c] = board[x][c] - 1;
+      }
+    }
+    //closes horizontal tiles.
+    for (int y = 0; y < length; y++){
+      if (board[r][y] != -1){
+        board[r][y] = board[r][y] - 1;
+      }
+    }
+    //closes diagonal tiles in all directions.
+    for (int x = r, y = c; x < length && y < length; x++, y ++){
+      if (board[x][y] != -1) board[x][y] = board[x][y] - 1;
+    }
+    for (int x = r, y = c; x < length && y < length; x--, y--){
+      if (board[x][y] != -1) board[x][y] = board[x][y] - 1;
+    }
+    for (int x = r, y = c; x < length && y < length; x--, y ++){
+      if (board[x][y] != -1) board[x][y] = board[x][y] - 1;
+    }
+    for (int x = r, y = c; x < length && y < length; x++, y --){
+      if (board[x][y] != -1) board[x][y] = board[x][y] - 1;
+    }
   }
   //After putting queen, this method closes the correct tiles.
-  private void putQueen(int r, int c){
+  private void placeQueen(int r, int c){
     //closes vertical tiles.
     for (int x = 0; x < length; x++){
       if (board[x][c] != -1){
@@ -89,4 +118,7 @@ public class QueenBoard{
   public int countSolutions(){
 
   }
+  public static void main(String[] args) {
+   System.out.println(QueenBoard(5));
+ }
 }
