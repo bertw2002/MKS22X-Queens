@@ -18,7 +18,7 @@ public class QueenBoard{
       board[r][c] = 0;
   }
   //After putting queen, this method closes the correct tiles.
-  private boolean putQueen(int r, int c){
+  private void putQueen(int r, int c){
     //closes vertical tiles.
     for (int x = 0; x < length; x++){
       if (board[x][c] != -1){
@@ -30,6 +30,19 @@ public class QueenBoard{
       if (board[r][y] != -1){
         board[r][y] = board[r][y] + 1;
       }
+    }
+    //closes diagonal tiles in all directions.
+    for (int x = r, y = c; x < length && y < length; x++, y ++){
+      if (board[x][y] != -1) board[x][y] = board[x][y] + 1;
+    }
+    for (int x = r, y = c; x < length && y < length; x--, y--){
+      if (board[x][y] != -1) board[x][y] = board[x][y] + 1;
+    }
+    for (int x = r, y = c; x < length && y < length; x--, y ++){
+      if (board[x][y] != -1) board[x][y] = board[x][y] + 1;
+    }
+    for (int x = r, y = c; x < length && y < length; x++, y --){
+      if (board[x][y] != -1) board[x][y] = board[x][y] + 1;
     }
   }
   /**
