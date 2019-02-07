@@ -10,14 +10,17 @@ public class QueenBoard{
     }
     length = size;
   }
-  private void addQueen(int r, int c){
-    board[r][c] = -1;
+  //Make private
+  public void addQueen(int r, int c){
+    Qboard[r][c] = -1;
     placeQueen(r, c);
   }
-  private void removeQueen(int r, int c){
+  //Make private
+  public void removeQueen(int r, int c){
     if (board[r][c] == -1) board[r][c] = 0;
     clearQueen(r, c);
   }
+  //private
   //After deleting queen, this method opens the correct tiles.
   private void clearQueen(int r, int c){
     //closes vertical tiles.
@@ -64,13 +67,13 @@ public class QueenBoard{
     for (int x = r, y = c; x < length && y < length; x++, y ++){
       if (board[x][y] != -1) board[x][y] = board[x][y] + 1;
     }
-    for (int x = r, y = c; x < length && y < length; x--, y--){
+    for (int x = r, y = c; x >= 0 && y >= 0; x--, y--){
       if (board[x][y] != -1) board[x][y] = board[x][y] + 1;
     }
-    for (int x = r, y = c; x < length && y < length; x--, y ++){
+    for (int x = r, y = c; x >= 0 && y < length; x--, y ++){
       if (board[x][y] != -1) board[x][y] = board[x][y] + 1;
     }
-    for (int x = r, y = c; x < length && y < length; x++, y --){
+    for (int x = r, y = c; x < length && y >= 0; x++, y --){
       if (board[x][y] != -1) board[x][y] = board[x][y] + 1;
     }
   }
@@ -115,10 +118,5 @@ public class QueenBoard{
   *@return the number of solutions found, and leaves the board filled with only 0's
   *@throws IllegalStateException when the board starts with any non-zero value
   */
-  public int countSolutions(){
-
-  }
-  public static void main(String[] args) {
-   System.out.println(QueenBoard(5));
- }
+  //public int countSolutions(){}
 }
