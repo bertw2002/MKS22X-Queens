@@ -4,5 +4,7 @@ public class Driver{
     System.out.println(board);
     board.addQueen(3, 3);
     System.out.println(board);
+    board.removeQueen(3, 3);
+    System.out.println(board);
  }
 }

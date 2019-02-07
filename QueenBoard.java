@@ -12,7 +12,7 @@ public class QueenBoard{
   }
   //Make private
   public void addQueen(int r, int c){
-    Qboard[r][c] = -1;
+    board[r][c] = -1;
     placeQueen(r, c);
   }
   //Make private
@@ -39,13 +39,13 @@ public class QueenBoard{
     for (int x = r, y = c; x < length && y < length; x++, y ++){
       if (board[x][y] != -1) board[x][y] = board[x][y] - 1;
     }
-    for (int x = r, y = c; x < length && y < length; x--, y--){
+    for (int x = r, y = c; x >= 0 && y >= 0; x--, y--){
       if (board[x][y] != -1) board[x][y] = board[x][y] - 1;
     }
-    for (int x = r, y = c; x < length && y < length; x--, y ++){
+    for (int x = r, y = c; x >= 0 && y < length; x--, y ++){
       if (board[x][y] != -1) board[x][y] = board[x][y] - 1;
     }
-    for (int x = r, y = c; x < length && y < length; x++, y --){
+    for (int x = r, y = c; x < length && y >= 0; x++, y --){
       if (board[x][y] != -1) board[x][y] = board[x][y] - 1;
     }
   }
