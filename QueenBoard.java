@@ -17,6 +17,21 @@ public class QueenBoard{
     if (board[r][c] == -1)
       board[r][c] = 0;
   }
+  //After putting queen, this method closes the correct tiles.
+  private boolean putQueen(int r, int c){
+    //closes vertical tiles.
+    for (int x = 0; x < length; x++){
+      if (board[x][c] != -1){
+        board[x][c] = board[x][c] + 1;
+      }
+    }
+    //closes horizontal tiles.
+    for (int y = 0; y < length; y++){
+      if (board[r][y] != -1){
+        board[r][y] = board[r][y] + 1;
+      }
+    }
+  }
   /**
   *@return The output string formatted as follows:
   *All numbers that represent queens are replaced with 'Q'
@@ -43,7 +58,6 @@ public class QueenBoard{
     return str;
   }
 
-
   /**
   *@return false when the board is not solveable and leaves the board filled with zeros;
   *        true when the board is solveable, and leaves the board in a solved state
@@ -51,6 +65,8 @@ public class QueenBoard{
   */
   public boolean solve(){
 
+    //if all cases don't work, return false at the end.
+    return false;
   }
 
   /**
