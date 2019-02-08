@@ -114,25 +114,22 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public boolean solve(){
-    return solveHelper(0);
+    return solveHelper(0, 0);
   }
   //helper for solve.
-  private boolean solveHelper(int column){
+  private boolean solveHelper(int row, int column){
     if (column >= length){
       return true;
     }
     //loops thru columns.
-    for (int x = 0; x < length; x++){
-      if (board[x][column] == 0)
-        placeQueen(x, column);
-        //places the rest of the queens in future columns.
-        if (solveHelper(column + 1))
-          return true;
-        else
-          removeQueen(x, column); //backtracking.
+    if (board[row][column] == 0){
+      addQueen(row, column);
+      return solveHelper(0, column + 1);
+    }else{
+      //if not valid, increment row
+      if (row >= length) row = -1;
+      return solveHelper(row + 1, column);
     }
-      //if all cases don't work, return false at the end.
-      return false;
   }
 
 
