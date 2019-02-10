@@ -1,5 +1,6 @@
 public class Driver{
   public static void main(String[] args) {
+    /*
     QueenBoard board = new QueenBoard(5);
     System.out.println(board);
     System.out.println(board.solve());
@@ -9,6 +10,11 @@ public class Driver{
         System.out.print(board.getBoard(x, y) + " ");
       }
       System.out.println("");
-    }
+    }*/
+    QueenBoard board1 = new QueenBoard(20);
+    System.out.println(board1.solve());
+    System.out.println(board1);
+    System.out.println(board1.getLength());
+    //System.out.println(board1.countSolutions());
  }
 }

@@ -17,8 +17,10 @@ public class QueenBoard{
     board[r][c] = -1;
     placeQueen(r, c);
   }
+  public int getLength(){
+    return length;
+  }
   private void removeQueen(int r, int c){
-    System.out.println(board[r][c]);
     if (board[r][c] == -1){
       board[r][c] = 0;
     }
@@ -117,25 +119,29 @@ public class QueenBoard{
     //checks if all board is 0 first.
     for (int x = 0; x < length; x++){
       for (int y = 0; y < length; y++){
-        if (board[x][y] == 0) throw new IllegalStateException();
+        if (board[x][y] != 0) throw new IllegalStateException();
       }
     }
     return solveHelper(0, 0);
   }
   //helper for solve.
   private boolean solveHelper(int row, int column){
-    if (column >= length){
-      return true;
-    }
-    //loops thru columns.
+    if (row == length) return false;
     if (board[row][column] == 0){
       addQueen(row, column);
-      return solveHelper(0, column + 1);
+      if (column == length - 1){
+        return true;
+      }
+      if (!solveHelper(0, column + 1)){
+        removeQueen(row, column);
+        return solveHelper(row + 1, column);
+      }
     }else{
       //if not valid, increment row
-      if (row >= length) row = -1;
+      if (row >= length) return false;
       return solveHelper(row + 1, column);
     }
+    return true;
   }
 
 
@@ -150,7 +156,16 @@ public class QueenBoard{
         if (board[x][y] == 0) throw new IllegalStateException();
       }
     }
+    //clears board
+    clear();
     return csolutionsHelper(0);
+  }
+  public void clear(){
+    for (int x = 0; x < length; x++){
+      for (int y = 0; y < length; y++){
+        board[x][y] = 0;
+      }
+    }
   }
   public int csolutionsHelper(int row){
     //counts the solutions
