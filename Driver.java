@@ -14,7 +14,7 @@ public class Driver{
     QueenBoard board1 = new QueenBoard(20);
     System.out.println(board1.solve());
     System.out.println(board1);
-    System.out.println(board1.getLength());
-    //System.out.println(board1.countSolutions());
+    QueenBoard board2 = new QueenBoard(5);
+    System.out.println(board2.countSolutions());
  }
 }

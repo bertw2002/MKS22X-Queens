@@ -17,14 +17,11 @@ public class QueenBoard{
     board[r][c] = -1;
     placeQueen(r, c);
   }
-  public int getLength(){
-    return length;
-  }
   private void removeQueen(int r, int c){
     if (board[r][c] == -1){
+      clearQueen(r, c);
       board[r][c] = 0;
     }
-    clearQueen(r, c);
   }
   //After deleting queen, this method opens the correct tiles.
   private void clearQueen(int r, int c){
@@ -153,7 +150,7 @@ public class QueenBoard{
     //checks if everything is 0 first.
     for (int x = 0; x < length; x++){
       for (int y = 0; y < length; y++){
-        if (board[x][y] == 0) throw new IllegalStateException();
+        if (board[x][y] != 0) throw new IllegalStateException();
       }
     }
     //clears board
@@ -168,18 +165,18 @@ public class QueenBoard{
     }
   }
   public int csolutionsHelper(int row){
-    //counts the solutions
-    int count = 0;
     if (row >= length){
       return 1;
     }
+    //counts the solutions
+    int count = 0;
     for (int x = 0; x < length; x++){
       if (board[row][x] == 0){
         addQueen(row, x);
         count += csolutionsHelper(row + 1);
+        removeQueen(row, x);
       }
-      //remove so board remains clear at the end.
-      removeQueen(row, x);
+
     }
     return count;
   }
