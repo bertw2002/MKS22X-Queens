@@ -54,7 +54,7 @@ public class QueenBoard{
     //makes sure original spot remains 0
     board[r][c] = 0;
   }
-  //After putting queen, this method closes the correct tiles.
+  //After putting queen, this method closes the correct tiles. Helper for addQueen.
   private void placeQueen(int r, int c){
     //closes vertical tiles.
     for (int x = 0; x < length; x++){
@@ -114,6 +114,12 @@ public class QueenBoard{
   *@throws IllegalStateException when the board starts with any non-zero value
   */
   public boolean solve(){
+    //checks if all board is 0 first.
+    for (int x = 0; x < length; x++){
+      for (int y = 0; y < length; y++){
+        if (board[x][y] == 0) throw new IllegalStateException();
+      }
+    }
     return solveHelper(0, 0);
   }
   //helper for solve.
@@ -137,5 +143,29 @@ public class QueenBoard{
   *@return the number of solutions found, and leaves the board filled with only 0's
   *@throws IllegalStateException when the board starts with any non-zero value
   */
-  //public int countSolutions(){}
+  public int countSolutions(){
+    //checks if everything is 0 first.
+    for (int x = 0; x < length; x++){
+      for (int y = 0; y < length; y++){
+        if (board[x][y] == 0) throw new IllegalStateException();
+      }
+    }
+    return csolutionsHelper(0);
+  }
+  public int csolutionsHelper(int row){
+    //counts the solutions
+    int count = 0;
+    if (row >= length){
+      return 1;
+    }
+    for (int x = 0; x < length; x++){
+      if (board[row][x] == 0){
+        addQueen(row, x);
+        count += csolutionsHelper(row + 1);
+      }
+      //remove so board remains clear at the end.
+      removeQueen(row, x);
+    }
+    return count;
+  }
 }
